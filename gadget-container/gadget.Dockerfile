@@ -8,6 +8,9 @@
 
 FROM docker.io/kinvolk/traceloop:202006050210553a5730 as traceloop
 
+# tracee image aquasecurity
+FROM aquasec/tracee:latest as tracee
+
 # Main gadget image
 
 # BCC built from:
@@ -44,4 +47,4 @@ COPY crio-hooks/gadget-prestart.json /opt/crio-hooks/gadget-prestart.json
 COPY crio-hooks/gadget-poststop.json /opt/crio-hooks/gadget-poststop.json
 
 COPY --from=traceloop /bin/traceloop /bin/traceloop
-COPY tracee /opt/tracee
+COPY --from=tracee /tracee/tracee /opt/tracee
