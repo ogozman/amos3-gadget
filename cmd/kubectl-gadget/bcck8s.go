@@ -88,6 +88,8 @@ var (
 
 	profileKernel bool
 	profileUser   bool
+
+	traceeParams string
 )
 
 func init() {
@@ -153,6 +155,8 @@ func init() {
 
 	profileCmd.PersistentFlags().BoolVarP(&profileUser, "user", "U", false, "Show stacks from user space only (no kernel space stacks)")
 	profileCmd.PersistentFlags().BoolVarP(&profileKernel, "kernel", "K", false, "Show stacks from kernel space only (no user space stacks)")
+
+	traceeCmd.PersistentFlags().StringVarP(&traceeParams, "args", "", "", fmt.Sprintf("Arguments for tracee"))
 }
 
 type postProcess struct {
@@ -324,7 +328,7 @@ func bccCmd(subCommand, bccScript string) func(*cobra.Command, []string) {
 			fmt.Printf(" %d = %s", i, node.Name)
 			go func(nodeName string, index int) {
 				if subCommand == "tracee" {
-					cmd := fmt.Sprintf("./opt/tracee")
+					cmd := fmt.Sprintf("./opt/tracee %s", traceeParams)
 					err = execPod(client, nodeName, cmd, os.Stdout, os.Stderr)
 					if fmt.Sprintf("%s", err) != "command terminated with exit code 137" {
 						failure <- fmt.Sprintf("Error running command: %v\n", err)
