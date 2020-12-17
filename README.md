@@ -47,6 +47,7 @@ Available Commands:
   tcptracer      Trace tcp connect, accept and close
   traceloop      Get strace-like logs of a pod from the past
   version        Show version
+  tracee         to call tracee on the host, no filtering available currently
 
 Flags:
   -h, --help                help for kubectl gadget
