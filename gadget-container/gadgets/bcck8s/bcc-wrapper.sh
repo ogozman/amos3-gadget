@@ -62,7 +62,7 @@ case $key in
         break
         ;;
     *)
-        echo "Unknown key yes: $key" >&2
+        echo "Unknown key: $key" >&2
         exit 1
         ;;
 esac

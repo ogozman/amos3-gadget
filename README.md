@@ -1,9 +1,6 @@
 # Inspektor Gadget
 
-Inspektor Gadget is a collection of tools (or gadgets) for developers of
-Kubernetes applications. While it is primarily designed for [Lokomotive](https://github.com/kinvolk/lokomotive),
-Kinvolk's open-source Kubernetes distribution, it can be used on other
-Kubernetes distributions.
+Inspektor Gadget is a collection of tools (or gadgets) to debug and inspect Kubernetes applications. While it was originally designed for [Lokomotive](https://kinvolk.io/lokomotive-kubernetes/), Kinvolk's open-source Kubernetes distribution, it works just as well on other Kubernetes distributions.
 
 ## Installation
 
@@ -47,7 +44,6 @@ Available Commands:
   tcptracer      Trace tcp connect, accept and close
   traceloop      Get strace-like logs of a pod from the past
   version        Show version
-  tracee         to call tracee on the host, no filtering available currently
 
 Flags:
   -h, --help                help for kubectl gadget
@@ -56,15 +52,15 @@ Flags:
 Use "kubectl gadget [command] --help" for more information about a command.
 ```
 
-- [Demo: the "bindsnoop" gadget](docs/demo-bindsnoop.md)
-- [Demo: the "execsnoop" gadget](docs/demo-execsnoop.md) – watch it [as GIF](docs/demos/demo-execsnoop-gifterminal.gif)
-- [Demo: the "opensnoop" gadget](docs/demo-opensnoop.md) – watch it [as GIF](docs/demos/demo-opensnoop-gifterminal.gif)
-- [Demo: the "traceloop" gadget](docs/demo-traceloop.md) – watch it [as GIF](docs/demos/demo-traceloop-gifterminal.gif)
-- [Demo: the "capabilities" gadget](docs/demo-capabilities.md) – watch is [as GIF](docs/demos/demo-capabilities-gifterminal.gif)
-- [Demo: the "tcptop" gadget](docs/demo-tcptop.md) – watch it [as GIF](docs/demos/demo-tcptop-gifterminal.gif)
-- [Demo: the "tcpconnect" gadget](docs/demo-tcpconnect.md) — watch it [as GIF](docs/demos/demo-tcpconnect-gifterminal.gif)
-- [Demo: the "network-policy" gadget](docs/demo-network-policy.md)
-- [Demo: the "profile" gadget](docs/demo-profile.md)
+- [Demo: the "bindsnoop" gadget](docs/guides/bindsnoop.md)
+- [Demo: the "execsnoop" gadget](docs/guides/execsnoop.md) – watch it [as GIF](docs/demos/demo-execsnoop-gifterminal.gif)
+- [Demo: the "opensnoop" gadget](docs/guides/opensnoop.md) – watch it [as GIF](docs/demos/demo-opensnoop-gifterminal.gif)
+- [Demo: the "traceloop" gadget](docs/guides/traceloop.md) – watch it [as GIF](docs/demos/demo-traceloop-gifterminal.gif)
+- [Demo: the "capabilities" gadget](docs/guides/capabilities.md) – watch is [as GIF](docs/demos/demo-capabilities-gifterminal.gif)
+- [Demo: the "tcptop" gadget](docs/guides/tcptop.md) – watch it [as GIF](docs/demos/demo-tcptop-gifterminal.gif)
+- [Demo: the "tcpconnect" gadget](docs/guides/tcpconnect.md) — watch it [as GIF](docs/demos/demo-tcpconnect-gifterminal.gif)
+- [Demo: the "network-policy" gadget](docs/guides/network-policy.md)
+- [Demo: the "profile" gadget](docs/guides/profile.md)
 
 As preview for the above demos, here is the `opensnoop` demo:
 

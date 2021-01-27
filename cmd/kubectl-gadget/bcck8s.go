@@ -33,12 +33,6 @@ var opensnoopCmd = &cobra.Command{
 	Run:   bccCmd("opensnoop", "/usr/share/bcc/tools/opensnoop"),
 }
 
-var traceeCmd = &cobra.Command{
-	Use:   "tracee",
-	Short: "Trace various syscalls",
-	Run:   bccCmd("tracee", ""),
-}
-
 var bindsnoopCmd = &cobra.Command{
 	Use:   "bindsnoop",
 	Short: "Trace IPv4 and IPv6 bind() system calls",
@@ -73,6 +67,12 @@ var capabilitiesCmd = &cobra.Command{
 	Use:   "capabilities",
 	Short: "Suggest Security Capabilities for securityContext",
 	Run:   bccCmd("capabilities", "/usr/share/bcc/tools/capable"),
+}
+
+var traceeCmd = &cobra.Command{
+	Use:   "tracee",
+	Short: "Trace various syscalls",
+	Run:   bccCmd("tracee", "/opt/tracee_exec"),
 }
 
 var (
@@ -230,7 +230,6 @@ func (post *postProcessSingle) Write(p []byte) (n int, err error) {
 
 func bccCmd(subCommand, bccScript string) func(*cobra.Command, []string) {
 	return func(cmd *cobra.Command, args []string) {
-
 		contextLogger := log.WithFields(log.Fields{
 			"command": fmt.Sprintf("kubectl-gadget %s", subCommand),
 			"args":    args,
@@ -327,25 +326,17 @@ func bccCmd(subCommand, bccScript string) func(*cobra.Command, []string) {
 			}
 			fmt.Printf(" %d = %s", i, node.Name)
 			go func(nodeName string, index int) {
-				if subCommand == "tracee" {
-					cmd := fmt.Sprintf("./opt/tracee %s", traceeParams)
-					err = execPod(client, nodeName, cmd, os.Stdout, os.Stderr)
-					if fmt.Sprintf("%s", err) != "command terminated with exit code 137" {
-						failure <- fmt.Sprintf("Error running command: %v\n", err)
-					}
+				cmd := fmt.Sprintf("exec /opt/bcck8s/bcc-wrapper.sh --tracerid %s --gadget %s %s %s %s %s -- %s",
+					tracerId, bccScript, labelFilter, namespaceFilter, podnameFilter, containernameFilter, gadgetParams)
+				var err error
+				if subCommand != "tcptop" {
+					err = execPod(client, nodeName, cmd,
+						postProcess.outStreams[index], postProcess.errStreams[index])
 				} else {
-					cmd := fmt.Sprintf("exec /opt/bcck8s/bcc-wrapper.sh --tracerid %s --gadget %s %s %s %s %s -- %s",
-						tracerId, bccScript, labelFilter, namespaceFilter, podnameFilter, containernameFilter, gadgetParams)
-					var err error
-					if subCommand != "tcptop" {
-						err = execPod(client, nodeName, cmd,
-							postProcess.outStreams[index], postProcess.errStreams[index])
-					} else {
-						err = execPod(client, nodeName, cmd, os.Stdout, os.Stderr)
-					}
-					if fmt.Sprintf("%s", err) != "command terminated with exit code 137" {
-						failure <- fmt.Sprintf("Error running command: %v\n", err)
-					}
+					err = execPod(client, nodeName, cmd, os.Stdout, os.Stderr)
+				}
+				if fmt.Sprintf("%s", err) != "command terminated with exit code 137" {
+					failure <- fmt.Sprintf("Error running command: %v\n", err)
 				}
 			}(node.Name, i) // node.Name is invalidated by the above for loop, causes races
 		}

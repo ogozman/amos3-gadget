@@ -7,7 +7,7 @@ changes := $(shell git status --porcelain)
 ifeq ($(changes),)
 	VERSION := $(TAG)
 else
-	VERSION := $(TAG)-dirty44
+	VERSION := $(TAG)-dirty
 endif
 
 LDFLAGS := "-X main.version=$(VERSION) \
