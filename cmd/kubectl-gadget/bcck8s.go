@@ -72,7 +72,7 @@ var capabilitiesCmd = &cobra.Command{
 var traceeCmd = &cobra.Command{
 	Use:   "tracee",
 	Short: "Trace various syscalls",
-	Run:   bccCmd("tracee", "/opt/tracee_exec"),
+	Run:   bccCmd("tracee", "/opt/tracee/tracee"),
 }
 
 var (
@@ -156,7 +156,6 @@ func init() {
 	profileCmd.PersistentFlags().BoolVarP(&profileUser, "user", "U", false, "Show stacks from user space only (no kernel space stacks)")
 	profileCmd.PersistentFlags().BoolVarP(&profileKernel, "kernel", "K", false, "Show stacks from kernel space only (no user space stacks)")
 
-	traceeCmd.PersistentFlags().StringVarP(&traceeParams, "args", "", "", fmt.Sprintf("Arguments for tracee"))
 }
 
 type postProcess struct {

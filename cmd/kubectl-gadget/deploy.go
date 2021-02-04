@@ -150,6 +150,8 @@ spec:
           mountPath: /sys/fs/bpf
         - name: localtime
           mountPath: /etc/localtime
+        - name: traceedeps
+          mountPath: /usr/src
       tolerations:
       - effect: NoSchedule
         operator: Exists
@@ -177,6 +179,9 @@ spec:
       - name: localtime
         hostPath:
           path: /etc/localtime
+      - name: traceedeps
+        hostPath: 
+          path: /usr/src
 `
 
 type parameters struct {

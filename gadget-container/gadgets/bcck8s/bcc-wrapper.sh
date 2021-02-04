@@ -68,6 +68,7 @@ case $key in
 esac
 done
 
+TRACEE=/opt/tracee/tracee
 GADGETTRACERMANAGER=/bin/gadgettracermanager
 BPFDIR="${BPFDIR:-/sys/fs/bpf}"
 
@@ -139,7 +140,11 @@ if [ "$MANAGER" = "true" ] ; then
     MODE="--cgroupmap"
     MAPPATH=$BPFDIR/gadget/cgroupidset-$TRACERID
   fi
-  exec $GADGET $MODE $MAPPATH "$@"
+  if [ "$GADGET" = "$TRACEE" ]; then 
+    exec $GADGET --pin map:mnt_ns_filter:$MAPPATH
+  else 
+    exec $GADGET $MODE $MAPPATH "$@"
+  fi
 else
   exec $GADGET "$@"
 fi
