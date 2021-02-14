@@ -1,5 +1,5 @@
 # The nature of this Inspector Gadget Fork
-This repository is a clone of inspector gadget repository from kinvolk. It has been created in order to add tracee[https://github.com/ogozman/tracee] as another gadget available to the users. The guide for tracee specifically is available in guides section of this readme file along with other guides on how to use various gadgets. The way to use tracee does not deviate from the ways the other gadgets are used. 
+This repository is a clone of inspector gadget repository from kinvolk. It has been created in order to add [tracee](https://github.com/ogozman/amos3-tracee) as another gadget available to the users. The guide for tracee specifically is available in guides section of this readme file along with other guides on how to use various gadgets. The way to use tracee does not deviate from the ways the other gadgets are used. 
 
 # Inspektor Gadget
 
