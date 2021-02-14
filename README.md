@@ -1,3 +1,6 @@
+# The nature of this Inspector Gadget Fork
+This repository is a clone of inspector gadget repository from kinvolk. It has been created in order to add tracee[https://github.com/ogozman/tracee] as another gadget available to the users. The guide for tracee specifically is available in guides section of this readme file along with other guides on how to use various gadgets. The way to use tracee does not deviate from the ways the other gadgets are used. 
+
 # Inspektor Gadget
 
 Inspektor Gadget is a collection of tools (or gadgets) to debug and inspect Kubernetes applications. While it was originally designed for [Lokomotive](https://kinvolk.io/lokomotive-kubernetes/), Kinvolk's open-source Kubernetes distribution, it works just as well on other Kubernetes distributions.
@@ -52,7 +55,7 @@ Flags:
 
 Use "kubectl gadget [command] --help" for more information about a command.
 ```
-
+- [Demo: the "tracee" gadget](docs/guides/tracee.md)
 - [Demo: the "bindsnoop" gadget](docs/guides/bindsnoop.md)
 - [Demo: the "execsnoop" gadget](docs/guides/execsnoop.md) – watch it [as GIF](docs/demos/demo-execsnoop-gifterminal.gif)
 - [Demo: the "opensnoop" gadget](docs/guides/opensnoop.md) – watch it [as GIF](docs/demos/demo-opensnoop-gifterminal.gif)
