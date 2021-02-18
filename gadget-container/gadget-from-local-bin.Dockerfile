@@ -47,3 +47,4 @@ COPY crio-hooks/gadget-prestart.json /opt/crio-hooks/gadget-prestart.json
 COPY crio-hooks/gadget-poststop.json /opt/crio-hooks/gadget-poststop.json
 
 COPY bin/traceloop /bin/traceloop
+COPY --from=builder /tracee/dist /opt/tracee
